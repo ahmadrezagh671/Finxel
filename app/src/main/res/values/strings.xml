@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Finxel</string>
+    <string name="about_us">"Finxel is an open-source Android app that reads financial SMS messages and turns them into structured spreadsheet records, using rules you define yourself.\n\nIt helps you collect and organize transaction data from different banks and payment providers entirely on your device, with nothing sent anywhere else.\n\nFinxel's own source code is released under the MIT License.It also uses a couple of open-source components under their own licenses, see LICENSE and THIRD-PARTY-NOTICES on GitHub for details.\n\nDriven by logic. Built by Ahmadrezagh671."</string>
+
+    <!-- Activity & Main strings -->
+    <string name="read_sms_permission_not_granted">READ_SMS permission is not granted</string>
+    <string name="no_config_found">No configuration found</string>
+    <string name="invalid_config_format">Invalid configuration format</string>
+    <string name="config_name_already_exists">Configuration name already exists, delete it first</string>
+    <string name="failed_to_save_config">Failed to save configuration</string>
+    <string name="saved_successfully">Saved successfully</string>
+    <string name="error_parsing_json">Error parsing JSON: %1$s</string>
+    <string name="config_deleted">Configuration deleted</string>
+    <string name="failed_to_delete_config">Failed to delete configuration</string>
+
+    <!-- EditConfigActivity strings -->
+    <string name="config_key_not_found">Configuration key not found</string>
+    <string name="failed_to_load_config">Failed to load configuration</string>
+    <string name="config_content_is_empty">Configuration content is empty</string>
+    <string name="config_names_cannot_be_changed">Configuration names cannot be changed</string>
+    <string name="config_saved_successfully">Configuration saved</string>
+
+    <!-- HistorySheetActivity strings -->
+    <string name="confirm_restore_title">Confirm Restore</string>
+    <string name="confirm_restore_message">You already have some records that will be replaced if you restore this backup. Are you sure you want to restore it?</string>
+    <string name="restore">Restore</string>
+    <string name="file_restored_successfully">File restored successfully</string>
+    <string name="failed_to_restore_file">Failed to restore file</string>
+    <string name="file_downloaded_to_downloads">File downloaded to Downloads</string>
+    <string name="failed_to_download">Failed to download</string>
+    <string name="no_app_found_to_open_file">No app found to open this file</string>
+    <string name="share_csv_file">Share CSV file</string>
+
+    <!-- Dialogs strings -->
+    <string name="add_configuration">Add Configuration</string>
+    <string name="select_method_to_import_config">Select a method to import your config</string>
+    <string name="add_config_from_github">Add Config from GitHub</string>
+    <string name="from_files">From Files</string>
+    <string name="from_clipboard">From Clipboard</string>
+    <string name="need_help_read_documentation">Need help? Read the documentation.</string>
+    <string name="delete_config">Delete Config</string>
+    <string name="are_you_sure_delete_config">Are you sure you want to delete this configuration?</string>
+    <string name="discard_changes_title">Discard changes?</string>
+    <string name="unsaved_changes_warning">You have unsaved changes. Are you sure you want to exit?</string>
+    <string name="stay">Stay</string>
+    <string name="discard">Discard</string>
+
+    <!-- Popups / Menu strings -->
+    <string name="edit_config">Edit Config</string>
+    <string name="delete_config_action">Delete Config</string>
+    <string name="settings">Settings</string>
+    <string name="move_top">Move Top</string>
+    <string name="last_unchecked">Last Unchecked</string>
+    <string name="exit">Exit</string>
+    <string name="copy_sheet">Copy %1$s</string>
+    <string name="clear_sheet">Clear %1$s</string>
+    <string name="history">History</string>
+    <string name="restore_action">Restore</string>
+    <string name="download_file">Download file</string>
+    <string name="open_file">Open file</string>
+    <string name="share_action">Share</string>
+    <string name="no_unchecked_item_found">No unchecked item found</string>
+
+    <!-- Settings strings -->
+    <string name="settings_title">Finxel Settings</string>
+
+    <!-- FragmentHome strings -->
+    <string name="no_config_added_yet">No configuration has been added yet. Create one to tell the app what to do.</string>
+    <string name="add_config">Add Config</string>
+    <string name="all_messages">All Messages</string>
+    <string name="all_messages_coming_soon">All Messages\nComing Soon</string>
+    <string name="failed_to_save_checked_status">Failed to save checked status</string>
+
+    <!-- FragmentSheet strings -->
+    <string name="powered_by_sora_editor">Powered by Sora Editor\nVS Code Theme</string>
+
+    <!-- FragmentSettings strings -->
+    <string name="disable_battery_optimization">Disable Battery Optimization</string>
+    <string name="battery_optimization_message">To ensure Finxel can reliably run in the background and process location service, please disable battery optimization for this app in the next screen.</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="allow_background_location">Allow Background Location</string>
+    <string name="background_location_message">Finxel uses background location to tag your incoming SMS records even when the app is closed. To allow this, please set the location permission to \'Allow all the time\' in the settings.</string>
+    <string name="not_now">Not Now</string>
+    <string name="enable_autostart">Enable Autostart</string>
+    <string name="xiaomi_autostart_message">Xiaomi devices restrict apps from running in the background. To ensure Finxel isn\'t closed by the system and doesn\'t miss any location records, please enable \'Autostart\' for this app on the next screen.</string>
+    <string name="app_version">App version %1$s</string>
+    <string name="app_version_error">App version unavailable</string>
+    <string name="configs_count_zero">0 configs</string>
+    <string name="configs_count_one">1 config</string>
+    <string name="configs_count_many">%1$d configs</string>
+    <string name="view_names_providers">View names, providers, and quick actions.</string>
+    <string name="refresh">Refresh</string>
+    <string name="saved_configuration_files">Saved configuration files</string>
+    <string name="app_settings">App settings</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
+    <string name="personalize_settings_page">Personalize the settings page.</string>
+    <string name="prevent_confirm_layout_dismissal">Prevent Confirm Layout Dismissal</string>
+    <string name="location_service">Location Service</string>
+    <string name="notification_entry">Notification Entry</string>
+    <string name="reset_saved_settings">Reset saved settings</string>
+    <string name="about_us_title">About us</string>
+
+    <!-- SMS Adapter strings -->
+    <string name="check">Check</string>
+    <string name="checked">Checked</string>
+    <string name="error_101">Error 101</string>
+    <string name="copied_to_clipboard">Copied to clipboard!</string>
+    <string name="entry_replies_channel">Entry Replies</string>
+    <string name="select_an_option">Select an option</string>
+    <string name="compare_value">Compare Value</string>
+
+    <!-- LocationCaptureService strings -->
+    <string name="processing_incoming_message">Processing Incoming Message</string>
+    <string name="location_capture_channel">Location capture</string>
+
+    <!-- NotificationReplyManager strings -->
+    <string name="data_entry">Data Entry</string>
+    <string name="entry_saved_successfully">Your entry has been saved successfully.</string>
+
+    <!-- HistorySheet strings -->
+    <string name="removed_files">Removed Files</string>
+    <string name="no_removed_items">No removed items found in history.</string>
+
+    <!-- Layout common strings -->
+    <string name="no_configuration_added_yet">No configuration has been added added yet. Create one to tell the app what to do.</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="submit">Submit</string>
+    <string name="type_here_to_edit">Type here to edit %1$s</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="provider">Provider</string>
+    <string name="no_provider">No provider</string>
+    <string name="saved_config_summary">Saved JSON configs in internal storage.</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="deleted">Deleted</string>
+    <string name="location">Location</string>
+    <string name="error">ERROR</string>
+    <string name="configuration">Configuration</string>
+    <string name="check_msg">Check</string>
+    <string name="add_config_from_clipboard">Add a config JSON from clipboard to start using Home and Sheet.</string>
+    <string name="saved_configs_storage">Saved JSON configs in internal storage.</string>
+    <string name="configs_refreshed">Configs refreshed</string>
+    <string name="settings_reset">Settings reset</string>
+    <string name="processing_incoming_message_notification_title">Processing Incoming Message</string>
+    <string name="no_configs_found">No configs found.\nAdd a config JSON from clipboard to start using Home and Sheet.</string>
+    <string name="existing_configs">Existing configs</string>
+    <string name="share_config">Share Config</string>
+    <string name="share_json_config_file">Share JSON Config</string>
+
+</resources>

@@ -1,0 +1,381 @@
+{
+  "information": {
+    "name": "Pasargad",
+    "provider": [
+      "B.Pasargad"
+    ],
+    "color": "#E8922F",
+    "location":true,
+    "app_version":"C01"
+  },
+  "notification_entry":[
+    {
+      "name":"description_entry",
+      "hint":"Description"
+    }
+  ],
+  "compare_with_last_message":[
+    {
+      "name":"Balance Check",
+      "field":"balance_before_transaction",
+      "last_message_field":"balance",
+      "error_text":"Balance Mismatch: "
+    }
+  ],
+  "spinner_list": [
+    {
+      "name": "ACTION",
+      "value": [
+        "Entertainment",
+        "Expenses",
+        "Income",
+        "Alex",
+        "Dad",
+        "Sis"
+      ]
+    }
+  ],
+  "skips": [
+    {
+      "type": "CONTAINS",
+      "action": "موبایل",
+      "error_text": "No Transaction found."
+    },
+    {
+      "type": "NOT_CONTAINS",
+      "action": "مانده:",
+      "error_text": "No Transaction found."
+    },
+    {
+      "type": "CONTAINS",
+      "action": "بانک",
+      "error_text": "No Transaction found."
+    }
+  ],
+  "fields_before_click":[
+    {
+      "name": "10000",
+      "type": "TEXT",
+      "text": "10000"
+    },
+    {
+      "name": "amount",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(?<![\\d.])[+-]\\d+(?![\\d.])",
+      "replacements_before": [
+        {
+          "find": ",",
+          "replace": ""
+        }
+      ]
+    },
+    {
+      "name":"balanceAmount",
+      "type":"REGEX_FIND_SMS_BODY",
+      "regex":"مانده:\\s*(\\d+)",
+      "group": 1,
+      "replacements_before": [
+        {
+          "find": ",",
+          "replace": ""
+        }
+      ]
+    },
+    {
+      "name": "balance",
+      "type": "MATH_OPERATION",
+      "operator": "/",
+      "fields": [
+        "balanceAmount",
+        "10000"
+      ]
+    },
+    {
+      "name": "amount_divided_by_10000",
+      "type": "MATH_OPERATION",
+      "operator": "/",
+      "fields": [
+        "amount",
+        "10000"
+      ]
+    },
+    {
+      "name": "balance_before_transaction",
+      "type":"MATH_OPERATION",
+      "operator": "-",
+      "fields": [
+        "balance",
+        "amount_divided_by_10000"
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "name": "time",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "\\d{2}\/(\\d{2}_\\d{2}:\\d{2})",
+      "group": 1,
+      "replacements_after": [
+        {
+          "find": "_",
+          "replace": " "
+        }
+      ]
+    },
+    {
+      "name": "date_without_year",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(\\d{2})\/\\d{2}_",
+      "group": 1
+    },
+    {
+      "name": "year",
+      "type": "TEXT",
+      "text": "1405"
+    },
+    {
+      "name": "dash",
+      "type": "TEXT",
+      "text": "-"
+    },
+    {
+      "name":"date",
+      "type":"COMBINE_FIELDS",
+      "fields":[
+        "year",
+        "dash",
+        "date_without_year"
+      ]
+    },
+    {
+      "name": "description",
+      "type": "NOTIFICATION_ENTRY_DATA",
+      "key": "description_entry"
+    },
+    {
+      "name": "bank_name",
+      "type": "TEXT",
+      "text": "Pasargad"
+    },
+    {
+      "name": "layout_text",
+      "type": "TEXT",
+      "text": "Enter your Pasargad Bank transaction details."
+    },
+    {
+      "name": "locationLatitude",
+      "type": "L_LATITUDE"
+    },
+    {
+      "name": "locationLongitude",
+      "type": "L_LONGITUDE"
+    },
+    {
+      "name":"comma",
+      "type":"TEXT",
+      "text":","
+    },
+    {
+      "name":"locationStartText",
+      "type":"TEXT",
+      "text":"=HYPERLINK(\"https://maps.google.com/maps?q=loc:"
+    },
+    {
+      "name":"locationEndText",
+      "type":"TEXT",
+      "text":"\", \"Location\")"
+    },
+    {
+      "name":"locationLink",
+      "type":"COMBINE_FIELDS",
+      "fields":[
+        "locationStartText",
+        "locationLatitude",
+        "comma",
+        "locationLongitude",
+        "locationEndText"
+      ],
+      "replacements_after": [
+        {
+          "find": "=HYPERLINK(\"https://maps.google.com/maps?q=loc:,\", \"Location\")",
+          "replace": "No Location"
+        }
+      ]
+    }
+  ],
+  "layout": [
+    {
+      "id": "TV_Hint",
+      "type": "TV",
+      "value": "layout_text"
+    },
+    {
+      "id": "H_Layout",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_amount",
+          "type": "ET_Number",
+          "hint": "Price",
+          "value": "amount_divided_by_10000"
+        },
+        {
+          "id": "ET_Time",
+          "type": "ET",
+          "hint": "Time",
+          "value": "time"
+        }
+      ]
+    },
+    {
+      "id": "ET_Description",
+      "type": "ET",
+      "hint": "Description",
+      "value": "description"
+    },
+    {
+      "id": "ActionLayout1",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action1",
+          "type": "ET_Number",
+          "hint": "First Price",
+          "value": "amount_divided_by_10000"
+        },
+        {
+          "id": "Spinner_Action1",
+          "type": "SPINNER",
+          "hint": "First Action",
+          "items": "ACTION",
+          "selected": 0
+        }
+      ]
+    },
+    {
+      "id": "ActionLayout2",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action2",
+          "type": "ET_Number",
+          "hint": "Second Price",
+          "value": ""
+        },
+        {
+          "id": "Spinner_Action2",
+          "type": "SPINNER",
+          "hint": "Second Action",
+          "items": "ACTION"
+        }
+      ]
+    },
+    {
+      "id": "ActionLayout3",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action3",
+          "type": "ET_Number",
+          "hint": "Third Price",
+          "value": ""
+        },
+        {
+          "id": "Spinner_Action3",
+          "type": "SPINNER",
+          "hint": "Third Action",
+          "items": "ACTION"
+        }
+      ]
+    }
+  ],
+"result": [
+    [
+      {
+        "name": "Price",
+        "value": "ET_amount",
+        "type": "ET_Number",
+        "size": 0.8
+      },
+      {
+        "name": "Bank",
+        "value": "bank_name",
+        "b_color": "#E8922F",
+        "f_color": "#ffffff",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Date",
+        "value": "date",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Time",
+        "value": "ET_Time",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Description",
+        "value": "ET_Description",
+        "type": "ET",
+        "size": 2.5
+      },
+      {
+        "name": "Action1",
+        "value": "ET_Amount_Action1",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action1",
+        "value": "Spinner_Action1",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Action2",
+        "value": "ET_Amount_Action2",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action2",
+        "value": "Spinner_Action2",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Action3",
+        "value": "ET_Amount_Action3",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action3",
+        "value": "Spinner_Action3",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Location Link",
+        "value": "locationLink",
+        "type": "ET",
+        "b_color": "#3A522A",
+        "f_color": "#DDFACA",
+        "size": 4
+      }
+    ]
+  ]
+}

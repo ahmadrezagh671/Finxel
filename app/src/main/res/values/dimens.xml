@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigationMenuSize">70dp</dimen>
+    <dimen name="navigationMenuMarginBottom">20dp</dimen>
+    <dimen name="navigationMenuFullSizeMarginTop">110dp</dimen>
+    <dimen name="navigationMenuFullSizeMarginTopHalf">100dp</dimen>
+    <dimen name="cellWidth">100dp</dimen>
+</resources>

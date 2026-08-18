@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="successContainer">#136B2E</color>
+    <color name="onSuccessContainer">#CFF4D5</color>
+
+    <color name="locationCard">#3C136B</color>
+    <color name="onLocationCard">#E6D6FD</color>
+
+</resources>

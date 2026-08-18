@@ -1,0 +1,26 @@
+# Build artifacts
+*.iml
+.gradle
+/build
+/captures
+.externalNativeBuild
+.cxx
+app/build
+app/debug
+
+# Local configuration
+local.properties
+/local.properties
+
+# IDE
+.idea
+.DS_Store
+
+# Firebase / Google Services - contains project-specific keys, never commit
+app/google-services.json
+google-services.json
+
+# Signing configs / keystores - never commit
+*.jks
+*.keystore
+keystore.properties

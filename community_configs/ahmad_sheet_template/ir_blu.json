@@ -1,0 +1,417 @@
+{
+  "information": {
+    "name": "Blu",
+    "provider": [
+      "09999987641",
+      "+989999987641",
+      "Blu"
+    ],
+    "color": "#2F7BDC",
+    "location":true,
+    "app_version":"C01"
+  },
+  "notification_entry":[
+    {
+      "name":"description_entry",
+      "hint":"Description"
+    }
+  ],
+  "compare_with_last_message":[
+    {
+      "name":"Balance Check",
+      "field":"balance_before_transaction",
+      "last_message_field":"balance_divided_by_10000",
+      "error_text":"Balance Mismatch: "
+    }
+  ],
+  "spinner_list": [
+    {
+      "name": "ACTION",
+      "value": [
+        "Entertainment",
+        "Expenses",
+        "Income",
+        "Alex",
+        "Dad",
+        "Sis"
+      ]
+    }
+  ],
+  "skips": [
+    {
+      "type": "CONTAINS",
+      "action": "رمز پویا",
+      "error_text": "This is a password message, not a transaction."
+    },
+    {
+      "type": "NOT_CONTAINS",
+      "action": "بلو",
+      "error_text": "No Blu Bank transaction found."
+    },
+    {
+      "type": "NOT_CONTAINS",
+      "action": "پول",
+      "error_text": "No Transaction found."
+    }
+  ],
+  "fields_before_click":[
+    {
+      "name": "amount_number",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(برداشت|واریز).*?(\\d+)\\s*ریال",
+      "group": 2,
+      "flags": [
+        "DOTALL"
+      ],
+      "replacements_before": [
+        {
+          "find": ",",
+          "replace": ""
+        }
+      ]
+    },
+    {
+      "name": "amount_sign",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(برداشت|واریز).*?(\\d+)\\s*ریال",
+      "group": 1,
+      "flags": [
+        "DOTALL"
+      ],
+      "replacements_after": [
+        {
+          "find": "برداشت",
+          "replace": "-"
+        },
+        {
+          "find": "واریز",
+          "replace": "+"
+        }
+      ]
+    },
+    {
+      "name": "amount",
+      "type": "COMBINE_FIELDS",
+      "fields": [
+        "amount_sign",
+        "amount_number"
+      ]
+    },
+    {
+      "name": "10000",
+      "type": "TEXT",
+      "text": "10000"
+    },
+    {
+      "name": "amount_divided_by_10000",
+      "type": "MATH_OPERATION",
+      "operator": "/",
+      "fields": [
+        "amount",
+        "10000"
+      ]
+    },
+    {
+      "name": "balance_number",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "موجودی:\\s*(\\d+)",
+      "group": 1,
+      "replacements_before": [
+        {
+          "find": ",",
+          "replace": ""
+        }
+      ]
+    },
+    {
+      "name": "balance_divided_by_10000",
+      "type": "MATH_OPERATION",
+      "operator": "/",
+      "fields": [
+        "balance_number",
+        "10000"
+      ]
+    },
+    {
+      "name": "balance_before_transaction",
+      "type":"MATH_OPERATION",
+      "operator": "-",
+      "fields": [
+        "balance_divided_by_10000",
+        "amount_divided_by_10000"
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "name": "date_day",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(\\d{2}:\\d{2})\\s*\\R\\d{4}\\.\\d{2}\\.(\\d{2})",
+      "group": 2,
+      "replacements_before": [{"find":"۰","replace":"0"},{"find":"۱","replace":"1"},{"find":"۲","replace":"2"},{"find":"۳","replace":"3"},{"find":"۴","replace":"4"},{"find":"۵","replace":"5"},{"find":"۶","replace":"6"},{"find":"۷","replace":"7"},{"find":"۸","replace":"8"},{"find":"۹","replace":"9"}]
+    },
+    {
+      "name": "date_h_m",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(\\d{2}:\\d{2})\\s*\\R\\d{4}\\.\\d{2}\\.(\\d{2})",
+      "group": 1,
+      "replacements_before": [{"find":"۰","replace":"0"},{"find":"۱","replace":"1"},{"find":"۲","replace":"2"},{"find":"۳","replace":"3"},{"find":"۴","replace":"4"},{"find":"۵","replace":"5"},{"find":"۶","replace":"6"},{"find":"۷","replace":"7"},{"find":"۸","replace":"8"},{"find":"۹","replace":"9"}]
+    },
+    {
+      "name": "date_year_month",
+      "type": "REGEX_FIND_SMS_BODY",
+      "regex": "(\\d{4}\\.\\d{2})(?=\\.\\d{2})",
+      "replacements_before": [{"find":"۰","replace":"0"},{"find":"۱","replace":"1"},{"find":"۲","replace":"2"},{"find":"۳","replace":"3"},{"find":"۴","replace":"4"},{"find":"۵","replace":"5"},{"find":"۶","replace":"6"},{"find":"۷","replace":"7"},{"find":"۸","replace":"8"},{"find":"۹","replace":"9"}],
+      "replacements_after":[
+        {
+          "find": ".",
+          "replace": "-"
+        }
+      ]
+    },
+    {
+      "name": "space",
+      "type": "TEXT",
+      "text": " "
+    },
+    {
+      "name": "time",
+      "type": "COMBINE_FIELDS",
+      "fields": [
+        "date_day",
+        "space",
+        "date_h_m"
+      ]
+    },
+    {
+      "name": "description",
+      "type": "NOTIFICATION_ENTRY_DATA",
+      "key": "description_entry"
+    },
+    {
+      "name": "bank_name",
+      "type": "TEXT",
+      "text": "Blu"
+    },
+    {
+      "name": "layout_text",
+      "type": "TEXT",
+      "text": "Enter your Blu Bank transaction details."
+    },
+    {
+      "name": "locationLatitude",
+      "type": "L_LATITUDE"
+    },
+    {
+      "name": "locationLongitude",
+      "type": "L_LONGITUDE"
+    },
+    {
+      "name":"comma",
+      "type":"TEXT",
+      "text":","
+    },
+    {
+      "name":"locationStartText",
+      "type":"TEXT",
+      "text":"=HYPERLINK(\"https://maps.google.com/maps?q=loc:"
+    },
+    {
+      "name":"locationEndText",
+      "type":"TEXT",
+      "text":"\", \"Location\")"
+    },
+    {
+      "name":"locationLink",
+      "type":"COMBINE_FIELDS",
+      "fields":[
+        "locationStartText",
+        "locationLatitude",
+        "comma",
+        "locationLongitude",
+        "locationEndText"
+      ],
+      "replacements_after": [
+        {
+          "find": "=HYPERLINK(\"https://maps.google.com/maps?q=loc:,\", \"Location\")",
+          "replace": "No Location"
+        }
+      ]
+    }
+  ],
+  "layout": [
+    {
+      "id": "TV_Hint",
+      "type": "TV",
+      "value": "layout_text"
+    },
+    {
+      "id": "H_Layout",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_amount",
+          "type": "ET_Number",
+          "hint": "Price",
+          "value": "amount_divided_by_10000"
+        },
+        {
+          "id": "ET_Time",
+          "type": "ET",
+          "hint": "Time",
+          "value": "time"
+        }
+      ]
+    },
+    {
+      "id": "ET_Description",
+      "type": "ET",
+      "hint": "Description",
+      "value": "description"
+    },
+    {
+      "id": "ActionLayout1",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action1",
+          "type": "ET_Number",
+          "hint": "First Price",
+          "value": "amount_divided_by_10000"
+        },
+        {
+          "id": "Spinner_Action1",
+          "type": "SPINNER",
+          "hint": "First Action",
+          "items": "ACTION",
+          "selected": 0
+        }
+      ]
+    },
+    {
+      "id": "ActionLayout2",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action2",
+          "type": "ET_Number",
+          "hint": "Second Price",
+          "value": ""
+        },
+        {
+          "id": "Spinner_Action2",
+          "type": "SPINNER",
+          "hint": "Second Action",
+          "items": "ACTION"
+        }
+      ]
+    },
+    {
+      "id": "ActionLayout3",
+      "type": "H_LinearLayout",
+      "inside": [
+        {
+          "id": "ET_Amount_Action3",
+          "type": "ET_Number",
+          "hint": "Third Price",
+          "value": ""
+        },
+        {
+          "id": "Spinner_Action3",
+          "type": "SPINNER",
+          "hint": "Third Action",
+          "items": "ACTION"
+        }
+      ]
+    }
+  ],
+  "result": [
+    [
+      {
+        "name": "Price",
+        "value": "ET_amount",
+        "type": "ET_Number",
+        "size": 0.8
+      },
+      {
+        "name": "Bank",
+        "value": "bank_name",
+        "b_color": "#2F7BDC",
+        "f_color": "#ffffff",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Date",
+        "value": "date_year_month",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Time",
+        "value": "ET_Time",
+        "type": "ET",
+        "size": 1
+      },
+      {
+        "name": "Description",
+        "value": "ET_Description",
+        "type": "ET",
+        "size": 2.5
+      },
+      {
+        "name": "Action1",
+        "value": "ET_Amount_Action1",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action1",
+        "value": "Spinner_Action1",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Action2",
+        "value": "ET_Amount_Action2",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action2",
+        "value": "Spinner_Action2",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Action3",
+        "value": "ET_Amount_Action3",
+        "type": "ET_Number",
+        "b_color": "#324149",
+        "f_color": "#ffffff",
+        "size": 0.8
+      },
+      {
+        "name": "Action3",
+        "value": "Spinner_Action3",
+        "type": "SPINNER",
+        "items": "ACTION",
+        "size": 1.2
+      },
+      {
+        "name": "Location Link",
+        "value": "locationLink",
+        "b_color": "#3A522A",
+        "f_color": "#DDFACA",
+        "type": "ET",
+        "size": 4
+      }
+    ]
+  ]
+}

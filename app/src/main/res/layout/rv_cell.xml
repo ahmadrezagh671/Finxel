@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textCell"
+    android:layout_width="@dimen/cellWidth"
+    android:layout_height="48dp"
+    android:maxHeight="48dp"
+    android:minHeight="48dp"
+    android:gravity="center"
+    android:background="@drawable/shape_cell_border"
+    android:textColor="?attr/colorOnBackground"
+    android:textSize="14sp"
+    android:padding="6dp"
+    android:singleLine="true"
+    android:ellipsize="middle"
+    />
