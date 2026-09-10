@@ -69,6 +69,8 @@ public class FragmentHome extends Fragment {
     FloatingActionButton fbMoveTop;
     Button btnAddConfig;
 
+    TextView tvNoMessageFound;
+
 
     public FragmentHome() {
         // Required empty public constructor
@@ -99,6 +101,9 @@ public class FragmentHome extends Fragment {
         chipGroupConfigList = view.findViewById(R.id.chipGroupConfigList);
         swipeRefreshMessagesLayout = view.findViewById(R.id.swipeRefreshMessagesLayout);
         tvComingSoon = view.findViewById(R.id.tvComingSoon);
+
+        tvNoMessageFound = view.findViewById(R.id.tvNoMessageFound);
+        tvNoMessageFound.setVisibility(GONE);
 
         layoutAddConfig = view.findViewById(R.id.layoutAddConfig);
         btnAddConfig = view.findViewById(R.id.btnAddConfig);
@@ -275,6 +280,7 @@ public class FragmentHome extends Fragment {
                 tvComingSoon.setVisibility(VISIBLE);
                 rvMessages.setVisibility(GONE);
                 swipeRefreshMessagesLayout.setVisibility(GONE);
+                tvNoMessageFound.setVisibility(GONE);
                 return;
             }
 
@@ -389,6 +395,9 @@ public class FragmentHome extends Fragment {
                 rvMessages.setAdapter(null);
             }
         }
+
+        tvNoMessageFound.setVisibility(smsListDictionary.get(selectedChip).getSmsList().isEmpty() ? VISIBLE : GONE);
+
         swipeRefreshMessagesLayout.setRefreshing(false);
     }
 

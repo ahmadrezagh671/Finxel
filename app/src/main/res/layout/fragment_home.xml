@@ -164,9 +164,6 @@
 
         </HorizontalScrollView>
 
-
-
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshMessagesLayout"
             android:layout_width="match_parent"
@@ -187,6 +184,22 @@
 
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewConfigList"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="48dp"
+            android:text="@string/no_message_found"
+            android:textColor="?attr/colorOnBackground"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/tvNoMessageFound"
+            />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbMoveTop"

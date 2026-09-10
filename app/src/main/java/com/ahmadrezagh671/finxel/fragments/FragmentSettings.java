@@ -13,12 +13,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +39,8 @@ import com.ahmadrezagh671.finxel.activities.MainActivity;
 import com.ahmadrezagh671.finxel.adapters.RVConfigAdapter;
 import com.ahmadrezagh671.finxel.models.configModel.ConfigModel;
 import com.ahmadrezagh671.finxel.popups.PopupConfigChipHold;
+import com.ahmadrezagh671.finxel.popups.PopupHomeFunctions;
+import com.ahmadrezagh671.finxel.popups.PopupSettingsFunctions;
 import com.ahmadrezagh671.finxel.utilities.AppSettings;
 import com.ahmadrezagh671.finxel.utilities.NotificationReplyManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -52,14 +57,15 @@ public class FragmentSettings extends Fragment {
     private static final String TAG = "FragmentSettings";
     private MainActivity mainActivity;
 
-    private TextView tvConfigCount;
-    private TextView tvConfigSubtitle;
-    private TextView tvConfigEmpty;
-    private RecyclerView rvConfigList;
-    private Button btnRefreshConfigs;
-    private Button btnAddConfig;
-    private Button btnResetSettings;
-    private TextView tvAppVersion;
+    ImageButton ibMenu;
+    TextView tvConfigCount;
+    TextView tvConfigSubtitle;
+    TextView tvConfigEmpty;
+    RecyclerView rvConfigList;
+    Button btnRefreshConfigs;
+    Button btnAddConfig;
+    Button btnResetSettings;
+    TextView tvAppVersion,tvAboutUs;
 
     private SwitchMaterial swLayoutConfirmPreventClose,swLocationService,swNotificationInput;
 
@@ -134,6 +140,14 @@ public class FragmentSettings extends Fragment {
         swLayoutConfirmPreventClose = view.findViewById(R.id.swLayoutConfirmPreventClose);
         swLocationService = view.findViewById(R.id.swLocationService);
         swNotificationInput = view.findViewById(R.id.swNotificationInput);
+        ibMenu = view.findViewById(R.id.ibMenu);
+
+        tvAboutUs = view.findViewById(R.id.tvAboutUs);
+        tvAboutUs.setText(HtmlCompat.fromHtml(
+                getString(R.string.about_us),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+        ));
+        tvAboutUs.setMovementMethod(LinkMovementMethod.getInstance());
 
         swLayoutConfirmPreventClose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -171,7 +185,18 @@ public class FragmentSettings extends Fragment {
             }
         });
 
+        ibMenu.setOnClickListener(this::menuClick);
+
         return view;
+    }
+
+    private void menuClick(View view) {
+        PopupSettingsFunctions.show(view, new PopupSettingsFunctions.OnSettingsFunctionsClickListener() {
+            @Override
+            public void onExitClicked() {
+                mainActivity.finish();
+            }
+        });
     }
 
     @Override

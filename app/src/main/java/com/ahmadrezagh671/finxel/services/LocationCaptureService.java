@@ -5,9 +5,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
@@ -141,11 +143,10 @@ public class LocationCaptureService extends Service {
             Location location = fetchLocation();
             if (location == null) {
                 Log.w(TAG, "handleCapture: could not obtain a location fix");
-                return;
+            }else {
+                saveLocation(smsId, location.getLatitude(), location.getLongitude());
+                Log.d(TAG, "handleCapture: saved location for sms id " + smsId);
             }
-
-            saveLocation(smsId, location.getLatitude(), location.getLongitude());
-            Log.d(TAG, "handleCapture: saved location for sms id " + smsId);
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
@@ -186,6 +187,16 @@ public class LocationCaptureService extends Service {
 
         if (!hasFine && !hasCoarse) {
             Log.w(TAG, "fetchLocation: no location permission granted");
+            return null;
+        }
+
+        LocationManager locationManager =
+                (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if (!locationEnabled){
+            Log.w(TAG, "fetchLocation: location in not enabled");
             return null;
         }
 

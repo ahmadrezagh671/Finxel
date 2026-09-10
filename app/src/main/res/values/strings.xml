@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Finxel</string>
-    <string name="about_us">"Finxel is an open-source Android app that reads financial SMS messages and turns them into structured spreadsheet records, using rules you define yourself.\n\nIt helps you collect and organize transaction data from different banks and payment providers entirely on your device, with nothing sent anywhere else.\n\nFinxel's own source code is released under the MIT License.It also uses a couple of open-source components under their own licenses, see LICENSE and THIRD-PARTY-NOTICES on GitHub for details.\n\nDriven by logic. Built by Ahmadrezagh671."</string>
+    <string name="about_us_tools">"Finxel is an open-source Android app that reads financial SMS messages and turns them into structured spreadsheet records, using rules you define yourself.\n\nIt helps you collect and organize transaction data from different banks and payment providers entirely on your device, with nothing sent anywhere else.\n\nFinxel's own source code is released under the MIT License.It also uses a couple of open-source components under their own licenses, see LICENSE and THIRD-PARTY-NOTICES on GitHub for details.\n\nDriven by logic. Built by Ahmadrezagh671."</string>
+    <string name="about_us">"<![CDATA[Finxel is an open-source Android app that reads financial SMS messages and turns them into structured spreadsheet records, using rules you define yourself.<br><br>It helps you collect and organize transaction data from different banks and payment providers entirely on your device, with nothing sent anywhere else.<br><br>Finxel's own source code is released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>. It also uses a couple of open-source components under their own licenses, see <a href="https://github.com/ahmadrezagh671/Finxel/blob/main/LICENSE">LICENSE</a> and <a href="https://github.com/ahmadrezagh671/Finxel/blob/main/THIRD-PARTY-NOTICES.md">THIRD-PARTY-NOTICES</a> on <a href="https://github.com/Ahmadrezagh671/Finxel">GitHub</a> for details.<br><br>Driven by logic. Built by <a href="https://github.com/Ahmadrezagh671">Ahmadrezagh671</a>.]]>"</string>
 
     <!-- Activity & Main strings -->
     <string name="read_sms_permission_not_granted">READ_SMS permission is not granted</string>
@@ -148,5 +149,6 @@
     <string name="existing_configs">Existing configs</string>
     <string name="share_config">Share Config</string>
     <string name="share_json_config_file">Share JSON Config</string>
+    <string name="no_message_found">No messages found for your configuration. Please double-check the providers in your configuration.</string>
 
 </resources>

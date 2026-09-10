@@ -51,7 +51,7 @@
                 android:id="@+id/ibMenu"
                 android:layout_width="40dp"
                 android:layout_height="0dp"
-                android:src="@drawable/ic_settings"
+                android:src="@drawable/ic_menu"
                 app:tint="?attr/colorOnBackground"
                 android:background="@android:color/transparent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -352,9 +352,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:lineSpacingExtra="4dp"
-                            android:text="@string/about_us"
+                            tools:text="@string/about_us_tools"
                             android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:id="@+id/tvAboutUs"
+                            />
 
                         <TextView
                             android:id="@+id/tvAppVersion"

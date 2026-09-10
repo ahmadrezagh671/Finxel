@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         dialogAddConfig.show(new DialogAddConfig.DialogResult() {
             @Override
             public void fromGithub() {
-                Utilities.openUrl(MainActivity.this,"https://github.com/ahmadrezagh671");
+                Utilities.openUrl(MainActivity.this,"https://github.com/ahmadrezagh671/Finxel/tree/main/community_configs");
             }
 
             @Override
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void help() {
-                Utilities.openUrl(MainActivity.this,"https://github.com/ahmadrezagh671");
+                Utilities.openUrl(MainActivity.this,"https://github.com/ahmadrezagh671/Finxel/blob/main/docs/write-configuration.md");
             }
         });
     }
