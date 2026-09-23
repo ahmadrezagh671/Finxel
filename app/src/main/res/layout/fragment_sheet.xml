@@ -70,42 +70,6 @@
             app:layout_constraintTop_toBottomOf="@+id/layoutTop"
             />
 
-        <!--<HorizontalScrollView
-            android:id="@+id/scrollViewConfigList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scrollbars="none"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:clipToPadding="false"
-            android:alpha="0.8"
-            >
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupConfigList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleSelection="true"
-                app:selectionRequired="true"
-                >
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipShowAll"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Blu Bank"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    />
-
-
-            </com.google.android.material.chip.ChipGroup>
-
-        </HorizontalScrollView>-->
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
@@ -128,6 +92,23 @@
 
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.ahmadrezagh671.finxel.views.VerticalZoomBar
+            android:id="@+id/verticalZoomBar"
+            android:layout_width="28dp"
+            android:layout_height="240dp"
+            android:layout_marginEnd="16dp"
+            android:max="100"
+            android:progress="50"
+            app:edgeMargin="16dp"
+            app:fillColor="?attr/colorPrimaryContainer"
+            app:iconColor="?attr/colorOnBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackColor="?attr/colorOutlineVariant"
+            android:alpha="0.7"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     

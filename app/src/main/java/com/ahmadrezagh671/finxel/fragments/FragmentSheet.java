@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.ahmadrezagh671.finxel.popups.PopupSheetFunctions;
 import com.ahmadrezagh671.finxel.utilities.ConfigManager;
 import com.ahmadrezagh671.finxel.utilities.CsvManager;
 import com.ahmadrezagh671.finxel.utilities.Utilities;
+import com.ahmadrezagh671.finxel.views.VerticalZoomBar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class FragmentSheet extends Fragment {
     MainActivity mainActivity;
 
     ImageButton ibMenu;
+    VerticalZoomBar verticalZoomBar;
 
     Map<String, SheetList> sheetListDictionary = new HashMap<>();
 
@@ -153,6 +156,7 @@ public class FragmentSheet extends Fragment {
                 if (lastUsedSheetList != null && !lastUsedSheetList.isEmpty()){
                     sheetListDictionary.get(lastUsedSheetList).setCurrentPosition(sheetRecyclerView.getLayoutManager().onSaveInstanceState());
                     sheetListDictionary.get(lastUsedSheetList).setHorizontalScrollPosition(horizontalScroll.getScrollX());
+                    sheetListDictionary.get(lastUsedSheetList).setZoomLevel(verticalZoomBar.getProgress());
                 }
 
                 lastUsedSheetList = tabName;
@@ -190,7 +194,8 @@ public class FragmentSheet extends Fragment {
                         dialog.show();
                     }
                 });
-
+                verticalZoomBar.setProgress(sheetListDictionary.get(tabName).getZoomLevel());
+                rowAdapter.setZoomLevel(zoomProgressToZoomLevel(verticalZoomBar.getProgress()));
                 sheetRecyclerView.setAdapter(rowAdapter);
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -211,12 +216,35 @@ public class FragmentSheet extends Fragment {
             }
         });
 
+        verticalZoomBar = view.findViewById(R.id.verticalZoomBar);
+        verticalZoomBar.setOnZoomChangeListener(new VerticalZoomBar.OnZoomChangeListener() {
+            @Override
+            public void onZoomChanged(VerticalZoomBar bar, int progress, boolean fromUser) {
+                if (!fromUser) return;
+
+                zoomHandler.removeCallbacks(zoomRunnable);
+                zoomHandler.postDelayed(zoomRunnable, 80);
+            }
+
+            @Override
+            public void onStartTrackingTouch(VerticalZoomBar bar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(VerticalZoomBar bar) {
+
+            }
+        });
+
         if (mainActivity.getConfigs().isEmpty()) {
             swipeRefreshLayout.setVisibility(View.GONE);
             tabLayout.setVisibility(View.GONE);
+            verticalZoomBar.setVisibility(View.GONE);
         } else {
             swipeRefreshLayout.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
+            verticalZoomBar.setVisibility(View.VISIBLE);
             loadTabsFromConfigs(0);
         }
 
@@ -302,9 +330,22 @@ public class FragmentSheet extends Fragment {
                 );
             }
 
-            sheetListDictionary.put(key,new SheetList(newData,null,0));
+            sheetListDictionary.put(key,new SheetList(newData,null,0,50));
         });
 
+    }
+
+
+    private final Handler zoomHandler = new Handler(Looper.getMainLooper());
+    private final Runnable zoomRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int progress = verticalZoomBar.getProgress();
+            ((RVRowCellAdapter) sheetRecyclerView.getAdapter()).setZoomLevel(zoomProgressToZoomLevel(progress));
+        }
+    };
+    private float zoomProgressToZoomLevel(int progress){
+        return 1.0f + (progress - 50) * 0.01f;
     }
 
 }

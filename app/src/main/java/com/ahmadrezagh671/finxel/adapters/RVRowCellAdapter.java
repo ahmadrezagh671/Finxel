@@ -30,6 +30,16 @@ public class RVRowCellAdapter extends RecyclerView.Adapter<RVRowCellAdapter.RowV
     List<List<String>> sheetData;
     ConfigModel configModel;
     OnItemClick onItemClick;
+    private float zoomLevel = 1.0f;
+
+    public void setZoomLevel(float zoomLevel) {
+        this.zoomLevel = zoomLevel;
+        notifyDataSetChanged();
+    }
+
+    public float getZoomLevel() {
+        return zoomLevel;
+    }
 
     public RVRowCellAdapter(List<List<String>> sheetData, ConfigModel configModel) {
         this.sheetData = sheetData;
@@ -61,6 +71,9 @@ public class RVRowCellAdapter extends RecyclerView.Adapter<RVRowCellAdapter.RowV
     public void onBindViewHolder(@NonNull RowViewHolder holder, int position) {
         holder.container.removeAllViews();
 
+        int baseCellHeight = (int) (48 * holder.container.getResources().getDisplayMetrics().density); // 48dp in px
+        float baseTextSizeSp = 14f;
+
         // add index cell ///////////////////////
         View viewCellIndex = LayoutInflater.from(holder.container.getContext()).inflate(R.layout.rv_cell, holder.container, false);
         TextView textCellIndex = viewCellIndex.findViewById(R.id.textCell);
@@ -71,9 +84,11 @@ public class RVRowCellAdapter extends RecyclerView.Adapter<RVRowCellAdapter.RowV
                 .getResources()
                 .getDimensionPixelSize(R.dimen.cellWidth);
         ViewGroup.LayoutParams paramCellIndex = textCellIndex.getLayoutParams();
-        paramCellIndex.width = (int) (widthCellIndex * 0.5);
+        paramCellIndex.width = (int) (widthCellIndex * 0.5 * zoomLevel);
+        paramCellIndex.height = (int) (baseCellHeight * zoomLevel);
         if (position == 0) paramCellIndex.height = (int) (paramCellIndex.height * 0.7);
         textCellIndex.setLayoutParams(paramCellIndex);
+        textCellIndex.setTextSize(baseTextSizeSp * zoomLevel);
         ((GradientDrawable)textCellIndex.getBackground()).setColor(Utilities.getThemeAttrColor(textCellIndex,com.google.android.material.R.attr.colorOutlineVariant));
         holder.container.addView(viewCellIndex);
         // /////////////////////////////////
@@ -93,9 +108,10 @@ public class RVRowCellAdapter extends RecyclerView.Adapter<RVRowCellAdapter.RowV
                         .getResources()
                         .getDimensionPixelSize(R.dimen.cellWidth);
                 ViewGroup.LayoutParams paramCellAlpha = textCellAlpha.getLayoutParams();
-                paramCellAlpha.width = (int) (widthCellAlpha * currentCell.size);
-                paramCellAlpha.height = (int) (paramCellAlpha.height * 0.7);
+                paramCellAlpha.width = (int) (widthCellAlpha * currentCell.size * zoomLevel);
+                paramCellAlpha.height = (int) (baseCellHeight * zoomLevel * 0.7);
                 textCellAlpha.setLayoutParams(paramCellAlpha);
+                textCellAlpha.setTextSize(baseTextSizeSp * zoomLevel);
                 ((GradientDrawable)textCellAlpha.getBackground()).setColor(Utilities.getThemeAttrColor(textCellAlpha,com.google.android.material.R.attr.colorOutlineVariant));
                 holder.container.addView(viewCellAlpha);
             }
@@ -138,8 +154,10 @@ public class RVRowCellAdapter extends RecyclerView.Adapter<RVRowCellAdapter.RowV
                     .getDimensionPixelSize(R.dimen.cellWidth);
 
             ViewGroup.LayoutParams params = textCell.getLayoutParams();
-            params.width = (int) (width * currentCell.size);
+            params.width = (int) (width * currentCell.size * zoomLevel);
+            params.height = (int) (baseCellHeight * zoomLevel);
             textCell.setLayoutParams(params);
+            textCell.setTextSize(baseTextSizeSp * zoomLevel);
 
             holder.container.addView(view);
         }

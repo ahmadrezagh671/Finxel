@@ -5,4 +5,5 @@
     <dimen name="navigationMenuFullSizeMarginTop">110dp</dimen>
     <dimen name="navigationMenuFullSizeMarginTopHalf">100dp</dimen>
     <dimen name="cellWidth">100dp</dimen>
+    <dimen name="cellHeight">48dp</dimen>
 </resources>

@@ -4,4 +4,10 @@
         <attr name="rvPaddingBottom" format="dimension" />
         <attr name="rvClipToPadding" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="VerticalZoomBar">
+        <attr name="trackColor" format="color" />
+        <attr name="fillColor" format="color" />
+        <attr name="iconColor" format="color" />
+        <attr name="edgeMargin" format="dimension" />
+    </declare-styleable>
 </resources>

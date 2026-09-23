@@ -15,8 +15,8 @@ android {
         applicationId = "com.ahmadrezagh671.finxel"
         minSdk = 28
         targetSdk = 36
-        versionCode = 23
-        versionName = "0.4.13.C01"
+        versionCode = 24
+        versionName = "0.4.14.C01"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

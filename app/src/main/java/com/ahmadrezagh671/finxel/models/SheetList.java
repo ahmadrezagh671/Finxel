@@ -12,11 +12,13 @@ public class SheetList {
     List<List<String>> csvList;
     Parcelable currentPosition;
     int horizontalScrollPosition;
+    int zoomLevel;
 
-    public SheetList(List<List<String>> csvList, Parcelable currentPosition, int horizontalScrollPosition) {
+    public SheetList(List<List<String>> csvList, Parcelable currentPosition, int horizontalScrollPosition,int zoomLevel) {
         this.currentPosition = currentPosition;
         this.csvList = csvList;
         this.horizontalScrollPosition = horizontalScrollPosition;
+        this.zoomLevel = zoomLevel;
     }
 
     public List<List<String>> getCsvList() {
@@ -41,5 +43,13 @@ public class SheetList {
 
     public void setHorizontalScrollPosition(int horizontalScrollPosition) {
         this.horizontalScrollPosition = horizontalScrollPosition;
+    }
+
+    public int getZoomLevel() {
+        return zoomLevel;
+    }
+
+    public void setZoomLevel(int zoomLevel) {
+        this.zoomLevel = zoomLevel;
     }
 }
